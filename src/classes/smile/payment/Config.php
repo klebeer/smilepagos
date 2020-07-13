@@ -14,11 +14,12 @@ class Config
     public function getDataFastRequest(): DataFastRequest
     {
         $request = new DataFastRequest();
-        $url = Environment::PRODUCTION;
-
         if (Configuration::get('DATA_FAST_DEV')) {
             $url = Environment::TEST;
             $request->setTestMode(true);
+        } else {
+            $request->setTestMode(false);
+            $url = Environment::PRODUCTION;
         }
 
         $request->setUrlRequest($url);
