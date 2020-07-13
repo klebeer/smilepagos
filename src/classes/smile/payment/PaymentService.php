@@ -18,7 +18,6 @@ use smile\payment\smile\payment\model\PaymentResponse;
 class PaymentService
 {
 
-    private $logger;
 
     public function requestCheckoutId(Payment $payment): string
     {
@@ -41,15 +40,17 @@ class PaymentService
                 $body['testMode'] = 'EXTERNAL';
             }
 
-            $this->getLogger()->debug("URL  " . $checkOutUri);
+            //$this->getLogger()->debug("URL  " . $checkOutUri);
 
 
             $body = http_build_query($body);
 
-            $this->getLogger()->debug("Body request-->  " . $body);
+            //$this->getLogger()->debug("Body request-->  " . $body);
+
 
             $response = Request::post($checkOutUri)
                 ->sendsForm()
+                ->strictSSL(!$payment->getRequest()->isTestMode())
                 ->addHeaders(array(
                     'Authorization' => $auth
                 ))
@@ -57,7 +58,9 @@ class PaymentService
                 ->send();
 
             $responseBody = $response->body;
-            $this->getLogger()->debug("Response Body", (array)$responseBody);
+
+            //$this->getLogger()->debug("Response Body", (array)$responseBody);
+
             $resultCode = $responseBody->result->code;
 
             if ($resultCode == "000.200.100") {
@@ -168,7 +171,7 @@ class PaymentService
         try {
             $resourcePathUri = $dataFastRequest->getResourcePathUri() . "?entityId=" . $dataFastRequest->getEntityId();
 
-            $this->getLogger()->debug("URI en resourcePathUri  -> " . $resourcePathUri);
+            //$this->getLogger()->debug("URI en resourcePathUri  -> " . $resourcePathUri);
             $auth = $this->getAuth($dataFastRequest);
 
             $response = Request::get($resourcePathUri)
@@ -177,7 +180,7 @@ class PaymentService
                 ))
                 ->send();
             $responseBody = $response->body;
-            $this->getLogger()->debug("Response Resource path", (array)$responseBody);
+            //$this->getLogger()->debug("Response Resource path", (array)$responseBody);
 
             return PaymentResponse::fromJson($responseBody);
 
