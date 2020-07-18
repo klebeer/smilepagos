@@ -146,7 +146,9 @@ class PaymentService
         $customParamBuilder = new CustomParamsBuilder();
         $customParamsKey = 'customParameters[' . $request->getMid() . "_" . $request->getTid() . ']';
 
-        return [$customParamsKey => $customParamBuilder->buildCustomParams($amount)];
+        $customParamValue = $customParamBuilder->buildCustomParams($amount);
+
+        return [$customParamsKey => $customParamValue];
     }
 
     private function getRiskParams(Payment $payment): array

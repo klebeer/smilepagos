@@ -10,6 +10,7 @@ class Amount
     private $subtotalIVA0;
     private $total;
     private $ivaRate;
+    private $tax;
 
 
     /**
@@ -83,5 +84,22 @@ class Amount
     {
         $this->subtotalIVA0 = $subtotalIVA0;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTax(): float
+    {
+        return $this->tax;
+    }
+
+    /**
+     * @param mixed $tax
+     */
+    public function setTax(float $tax): void
+    {
+        $this->tax = $tax;
+    }
+
 
 }

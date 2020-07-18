@@ -5,8 +5,6 @@ namespace smile\payment\smile\payment;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use smile\payment\smile\payment\model\Message;
-use smile\payment\smile\payment\model\PaymentResponse;
 
 
 class SmileDB

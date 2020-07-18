@@ -411,7 +411,6 @@ class smilepagos extends PaymentModule
             $customerInfo = $this->getCustomerInfo();
             $amount = $this->getAmount();
 
-
             $payment->setProductInfo($productInfo);
             $payment->setCustomerInfo($customerInfo);
             $payment->setAmount($amount);
@@ -498,22 +497,17 @@ class smilepagos extends PaymentModule
         $amount = new Amount();
         $totalOrder = $cart->getOrderTotal(true, Cart::BOTH);
         $amount->setTotal($totalOrder);
+        $subtotalIVA = $cart->getOrderTotal(false, Cart::BOTH);
 
-        $subtotalIVA = 0.0;
+        $tax = round($totalOrder - $subtotalIVA, 2);
+        $taxRate = round(($tax * 100) / $subtotalIVA, 2);
+
+        $amount->setTax($tax);
+        $amount->setIvaRate($taxRate);
         $subtotalIVA0 = 0.0;
 
-
-        foreach ($cart->getProducts() as $product) {
-            if ($product['rate'] > 0) {
-                $subtotalIVA += $product['total'];
-                $amount->setIvaRate($product['rate']);
-            } else {
-                $subtotalIVA0 += $product['total'];
-            }
-        }
         $amount->setSubtotalIVA($subtotalIVA);
         $amount->setSubtotalIVA0($subtotalIVA0);
-
         return $amount;
     }
 

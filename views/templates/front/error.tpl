@@ -23,10 +23,13 @@
                 <section id="content" class="page-content card card-block">
 
                     <div class="ps-shown-by-js">
-                        <article class="alert alert-danger mt-2 js-alert-payment-conditions" role="alert" data-alert="danger">
-                            Lo sentimos, tu orden en no se pudo realizar utilizando Datafast: <strong>{$error_msg}</strong>
+                        <article class="alert alert-danger mt-2 js-alert-payment-conditions" role="alert"
+                                 data-alert="danger">
+                            Lo sentimos, tu orden en no se pudo realizar utilizando Datafast:
+                            <strong>{$error_msg}</strong>
                         </article>
-                        <a href="{$redirect}" class="btn btn-primary center-block">Regresar al carrito de compras</a><br/>
+                        <a href="{$redirect}" class="btn btn-primary center-block">Regresar al carrito de
+                            compras</a><br/>
                     </div>
 
 

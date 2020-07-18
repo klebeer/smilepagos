@@ -42,7 +42,7 @@ class SmilepagosResultModuleFrontController extends ModuleFrontController
             $checkOutId = Tools::getValue('id');
             $resourcePathUri = str_replace("{id}", $checkOutId, $request->getResourcePathUri());
 
-            $this->getLogger()->debug("resourcePathUri--->" . $resourcePathUri);
+            //$this->getLogger()->debug("resourcePathUri--->" . $resourcePathUri);
             $request->setResourcePathUri($resourcePathUri);
             $paymentResponse = $paymentService->processPayment($request);
             $resultCode = $paymentResponse->getResult()->getCode();
